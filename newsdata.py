@@ -1,7 +1,6 @@
 import psycopg2
 from prettytable import from_db_cursor
 
-# table = PrettyTable()
 
 # Answers the question of the most popular articles
 print('What are the most popular articles of all time?')
