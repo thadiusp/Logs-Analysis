@@ -3,7 +3,7 @@ from prettytable import from_db_cursor
 
 
 # Answers the question of the most popular articles
-print('What are the most popular articles of all time?')
+print('What are the most popular three articles of all time?')
 connection = psycopg2.connect(database='news')
 
 with connection:
@@ -18,7 +18,7 @@ connection.close()
 
 
 # Answers the question of the most popular author
-print('Who are the most popular authors?')
+print('Who are the most popular article authors of all time?')
 connection = psycopg2.connect(database='news')
 
 with connection:
