@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import psycopg2
 from prettytable import from_db_cursor
 
