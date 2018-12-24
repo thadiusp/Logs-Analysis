@@ -11,9 +11,9 @@ connection = psycopg2.connect(database='news')
 with connection:
     cursor = connection.cursor()
     cursor.execute(
-        """SELECT articles.title, count(*) AS num
+        """SELECT articles.title, count(log.path) AS views
         FROM articles JOIN log ON log.path LIKE concat('%', articles.slug, '%')
-        GROUP BY articles.title ORDER BY num DESC LIMIT 3"""
+        GROUP BY articles.title ORDER BY views DESC LIMIT 3"""
     )
 
     x = from_db_cursor(cursor)
@@ -28,11 +28,11 @@ connection = psycopg2.connect(database='news')
 with connection:
     cursor = connection.cursor()
     cursor.execute(
-        """SELECT authors.name, count(*) AS num
+        """SELECT authors.name, count(log.path) AS views
         FROM authors, articles, log
         WHERE authors.id = articles.author AND log.path
         like concat('%', articles.slug, '%')
-        GROUP BY authors.name ORDER BY num DESC"""
+        GROUP BY authors.name ORDER BY views DESC"""
     )
 
     x = from_db_cursor(cursor)
