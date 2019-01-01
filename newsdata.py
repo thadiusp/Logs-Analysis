@@ -12,7 +12,7 @@ with connection:
     cursor = connection.cursor()
     cursor.execute(
         """SELECT articles.title, count(log.path) AS views
-        FROM articles JOIN log ON log.path LIKE concat('%', articles.slug, '%')
+        FROM articles, log where log.path = concat('/article/', articles.slug)
         GROUP BY articles.title ORDER BY views DESC LIMIT 3"""
     )
 
@@ -30,8 +30,8 @@ with connection:
     cursor.execute(
         """SELECT authors.name, count(log.path) AS views
         FROM authors, articles, log
-        WHERE authors.id = articles.author AND log.path
-        like concat('%', articles.slug, '%')
+        WHERE authors.id = articles.author AND 
+        log.path = concat('/article/', articles.slug)
         GROUP BY authors.name ORDER BY views DESC"""
     )
 
